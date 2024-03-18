@@ -15,6 +15,7 @@ export const H1 = styled.h1`
     font-size: 4rem;
     font-weight: 600;
     letter-spacing: 0.05em;
+    color: #8075FF;
 `
 
 export const H3 = styled.h3`
@@ -32,14 +33,12 @@ export const Text = styled.span`
     font-size: 2rem;
     font-weight: 600;
     padding-bottom: 5px;
-    color: black;
-    color: inherit;
+    color: #8075FF;
 `;
 
 export const SubText = styled.span`
     display: block;
     text-align: center;
-    color: #2e2e2e;
-    color: inherit;
+    color: #6320EE;
     font-size: 1.5rem;
 `;

@@ -10,6 +10,7 @@ const NavWrap = styled.div`
 
 const LogoWrap = styled.div`
     padding: 30px 0 20px 60px;
+    color: #8075FF;
 `;
 
 const LogoText = styled.h1`
@@ -24,7 +25,6 @@ const SubLogoText = styled(LogoText)`
     font-weight: 400;
     display: block;
     text-align: center;
-    color: #2e2e2e;
     font-size: 1.5rem;
 `;
 
@@ -40,7 +40,7 @@ const Link = styled.a`
     padding-right: 20px;
     z-index: 2;
     &:hover {
-        color: white;
+        color: #8075FF;
         cursor: pointer;
     }
     &:last-child{
@@ -59,7 +59,7 @@ const LinkText = styled.span`
 const LinkSubText = styled.span`
     display: block;
     text-align: center;
-    color: #2e2e2e;
+    color: #CAD5CA;
     color: inherit;
     font-size: 0.75rem;
 `;
@@ -85,8 +85,12 @@ export const Nav = () => {
                 <LinkSubText>getting started</LinkSubText>
             </Link>
             <Link onClick={() => {}}>
-                <LinkText>sp-kn[Lang]</LinkText>
-                <LinkSubText>spoken Lang</LinkSubText>
+                <LinkText>gt-ngst-rt-d/</LinkText>
+                <LinkSubText>getting started</LinkSubText>
+            </Link>
+            <Link onClick={() => {}}>
+                <LinkText>Ex-mp-ls</LinkText>
+                <LinkSubText>Examples</LinkSubText>
             </Link>
             <Link onClick={() => {}}>
                 <LinkText>[Lang]cm-un-ty</LinkText>

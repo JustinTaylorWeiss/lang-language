@@ -9,10 +9,6 @@ const AppWrap = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    border: 4px solid black;
-    border-top: none;
-    border-bottom: none;
-    backdrop-filter: brightness(140%);
 `;
 
 //background-image: linear-gradient(#3c8fde, #8fff63);
@@ -27,3 +23,20 @@ const App = () => {
 }
 
 export default App;
+
+/*
+#8075FF Medium
+#6320EE Electric
+#211A1D Dark
+#F8F0FB Light
+#CAD5CA Accent
+
+
+Mode 2
+
+#2C363F Dark
+#E75A7C Accent
+#F2F5EA Light
+#D6DBD2 offwhite
+#BBC7A4 accent2
+*/
