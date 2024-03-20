@@ -12,6 +12,7 @@ export const TileWrap = styled.div`
 export const H1 = styled.h1`
     padding-left: 60px;
     margin: 0;
+    margin-top: 120px;
     font-size: 4rem;
     font-weight: 600;
     letter-spacing: 0.05em;

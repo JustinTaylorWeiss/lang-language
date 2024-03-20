@@ -1,6 +1,8 @@
 import styled from "styled-components";
-import { LandingTile } from "./tiles";
-import { GettingStartedTile } from "./tiles";
+import { Home } from "./tiles";
+import { useEffect } from "react";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { Nav } from "./global/Nav";
 
 const AppWrap = styled.div`
     max-width: 1200px;
@@ -11,15 +13,18 @@ const AppWrap = styled.div`
     align-items: center;
 `;
 
-//background-image: linear-gradient(#3c8fde, #8fff63);
-
 const App = () => {
-  return (
-    <AppWrap>
-        <LandingTile/>
-        <GettingStartedTile/>
-    </AppWrap>
-  );
+
+    return <BrowserRouter>
+        <AppWrap>
+            <Nav/>
+            <Routes>
+                <Route exact path={"/"} element={<Home/>}/>
+                <Route exact path={"/examples"} element={<div>Hello World</div>}/>
+                <Route path = "*" element={<Navigate to="/"/>}/>
+            </Routes>
+        </AppWrap>
+    </BrowserRouter>;
 }
 
 export default App;
@@ -30,13 +35,4 @@ export default App;
 #211A1D Dark
 #F8F0FB Light
 #CAD5CA Accent
-
-
-Mode 2
-
-#2C363F Dark
-#E75A7C Accent
-#F2F5EA Light
-#D6DBD2 offwhite
-#BBC7A4 accent2
 */
