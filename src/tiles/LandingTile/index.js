@@ -5,7 +5,7 @@ import sound from "./assets/sound.png";
 import { useState } from "react";
 
 const CTA = styled.div`
-    margin: 120px 0px;
+    margin: 120px 0px 0px 0px;
     text-align: center;
     font-size: 2.2rem;
     line-height: 3rem;
@@ -13,12 +13,18 @@ const CTA = styled.div`
         cursor: url(${sound}) 20 20,
         pointer;
     }
-`;
-
-const CTA2 = styled(CTA)`
-    margin: 0px;
-    &:hover {
-        cursor: default;
+    @media (max-width: 700px) {
+        font-size: 1.75rem;
+    }
+    @media (max-width: 550px) {
+        font-size: 1.5rem;
+    }
+    @media (max-width: 450px) {
+        font-size: 1.25rem;
+        line-height: 2rem;
+    }
+    @media (max-width: 350px) {
+        font-size: 1rem;
     }
 `;
 
@@ -29,7 +35,7 @@ export const LandingTile = () => {
     const speak = () => {
         if(!speaking) {
             setSpeaking(true);
-            const utterance = new SpeechSynthesisUtterance("el-ang ice eighn e-glish peace-ood-oh el-ang. Teece el-ang seendnses e-glish aid ice esspr e-sea tee-yo el-earn");
+            const utterance = new SpeechSynthesisUtterance("el-ang ice eighn e-glish peace-ood-oh el-ang. Teece el-ang seendnses e-glish aid haice only effvuh arels tee-yo el-earn");
             utterance.onend = () => {setSpeaking(false)}
             window.speechSynthesis.speak(utterance);
         }
@@ -39,10 +45,7 @@ export const LandingTile = () => {
         <CTA onClick={speak}>
             Lang is an English pseudo language.<br/>
             This language condenses english<br/>
-            and is super easy to learn.
+            and has only 5 rules to learn.
         </CTA>
-        <CTA2>
-            There are only 5 rules to reading / writing in Lang
-        </CTA2>
     </TileWrap>
 };

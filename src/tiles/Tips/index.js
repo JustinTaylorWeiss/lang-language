@@ -65,7 +65,7 @@ export const Tips = () => {
     return <TileWrap>
         <H1>Tips For Using Lang</H1>
         <UL>
-            <LI>Letters Pairs that make one sound can be grouped to make words easier to read</LI>
+            <LI>Letters pairs that make one sound can be grouped to make words easier to read</LI>
             <LISubText>th, sh, ch, wh, ph, kn, gn, gh</LISubText>
             <Example x={xCount()} sentence={[
                 ["A/-sh","is","ea-sy","to", "rd", "wh-n/", "yu", "gr-p/", "it", "ts", "wy"],

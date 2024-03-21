@@ -9,6 +9,9 @@ const Row = styled.div`
     justify-content: center;
     align-items: center;
     gap: 100px;
+    @media (max-width: 600px) {
+        gap: 50px;
+    }
 `;
 
 const UL = styled.ul`
@@ -20,6 +23,7 @@ const UL = styled.ul`
 const OL = styled.ol`
     padding-top: 20px;
     margin-bottom: 0;
+    padding-left: 0;
     width: 75%;
     font-size: 1.65rem;
 `;
@@ -33,6 +37,17 @@ const PFill = styled(P)`
 const LI = styled.li`
     text-align: justify;
     text-align-last: justify;
+    @media (max-width: 1300px) {
+        padding: 50px 0px;
+        text-align-last: left;
+        text-align: left;
+    }
+    @media (max-width: 600px) {
+        font-size: 1.5rem;
+    }
+    @media (max-width: 400px) {
+        font-size: 1.25rem;
+    }
 `;
 
 const LISubText = styled(SubText)`

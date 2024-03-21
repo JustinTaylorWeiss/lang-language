@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { useMediaQuery } from 'react-responsive'
+import { useNavigate } from "react-router-dom";
 import { TileWrap, H1, H3, P, Text, SubText } from "../../global";
 import { Example } from "../../global/Example";
 
@@ -9,6 +10,12 @@ const Row = styled.div`
     justify-content: center;
     align-items: center;
     gap: 100px;
+    @media (max-width: 600px) {
+        gap: 50px;
+    }
+    @media (max-width: 350px) {
+        gap: 25px;
+    }
 `;
 
 const RowS = styled.div`
@@ -16,6 +23,22 @@ const RowS = styled.div`
     justify-content: center;
     align-items: center;
     gap: 50px;
+    @media (max-width: 600px) {
+        gap: 25px;
+    }
+    @media (max-width: 350px) {
+        gap: 20px;
+    }
+`;
+
+const H4 = styled(H3)`
+    font-size: 1.5rem;
+    font-weight: 400;
+    margin-top: 0px;
+    color: #6320EE;
+    @media (max-width: 500px) {
+        font-size: 1rem;
+    }
 `;
 
 const UL = styled.ul`
@@ -27,6 +50,7 @@ const UL = styled.ul`
 const OL = styled.ol`
     padding-top: 20px;
     margin-bottom: 0;
+    padding-left: 0;
     width: 75%;
     font-size: 1.65rem;
 `;
@@ -40,15 +64,44 @@ const PFill = styled(P)`
 const LI = styled.li`
     text-align: justify;
     text-align-last: justify;
+    @media (max-width: 1300px) {
+        padding: 50px 0px;
+        text-align-last: left;
+        text-align: left;
+    }
+    @media (max-width: 600px) {
+        font-size: 1.5rem;
+    }
+    @media (max-width: 400px) {
+        font-size: 1.25rem;
+    }
 `;
 
 const LIS = styled(LI)`
     font-size: 1.5rem;
+    @media (max-width: 1300px) {
+        padding: 50px 0px;
+        text-align-last: left;
+        text-align: left;
+    }
+    @media (max-width: 600px) {
+        font-size: 1.5rem;
+    }
+    @media (max-width: 400px) {
+        font-size: 1.25rem;
+    }
 `;
 
 const LISubText = styled(SubText)`
     padding-top: 10px;
     color: #F8F0FB;
+`;
+
+const ExamplesWrap = styled.div`
+    text-align: center;
+    &:hover {
+        cursor: pointer;
+    }
 `;
 
 function* xCount() {
@@ -60,8 +113,16 @@ function* xCount() {
 
 export const SpeakingLangTile = () => {
 
+    const navigate = useNavigate();
+
+    const onExamplesClick = () => {
+        window.scrollTo(0, 0);
+        navigate("/examples");
+    }
+
     return <TileWrap>
         <H1>Speaking Lang</H1>
+        <H4>click on examples to hear them</H4>
         <OL>
             <LI>To pronounce words, start by saying the name of the first letter in each word.</LI>
             <Row>
@@ -114,5 +175,9 @@ export const SpeakingLangTile = () => {
                 ["fx","was","fix","not","fox"],
             ]} audio="FX dubs ef-icks ent ef-ox"/>
         </OL>
+        <ExamplesWrap onClick={onExamplesClick}>
+            <H1>More Examples</H1>
+            <H4>Click here for a table of common words</H4>
+        </ExamplesWrap>
     </TileWrap>
 };

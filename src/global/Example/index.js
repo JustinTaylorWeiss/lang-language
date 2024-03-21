@@ -18,11 +18,32 @@ const Column = styled.div`
     align-items: center;
 `
 
+const ExampleText = styled(Text)`
+     &:hover {
+        cursor: url(${sound}) 20 20,
+        pointer
+    }
+`;
+
+const ExampleSubText = styled(SubText)`
+    &:hover {
+        cursor: url(${sound}) 20 20,
+        pointer
+    }
+`;
+
+
 const TextWord = styled(Text)`
     color: ${props => props.$hover ? "#F8F0FB" : "#8075FF"};
     transition: 0.2s linear;
     &:hover {
-        cursor: ${props => props.$audio ? "pointer" : "default"};
+        cursor: ${props => props.$audio ? "inherit" : "default"};
+    }
+    @media (max-width: 700px) {
+        font-size: 1.5rem;
+    }
+    @media (max-width: 400px) {
+        font-size: 1.25rem;
     }
 `;
 
@@ -31,13 +52,19 @@ const SubTextWord = styled(SubText)`
     color: ${props => props.$hover ? "#F8F0FB" : "#6320EE"};
     transition: 0.2s linear;
     &:hover {
-        cursor: ${props => props.$audio ? "pointer" : "default"};
+        cursor: ${props => props.$audio ? "inherit" : "default"};
+    }
+    @media (max-width: 700px) {
+        font-size: 1.25rem;
+    }
+    @media (max-width: 400px) {
+        font-size: 1rem;
     }
 `;
 
 const Img = styled.img`
-    padding-left: 20px;
-    width: 35px;
+    padding-left: 10px;
+    width: 25px;
     &:hover {
         cursor: pointer;
     }
@@ -85,20 +112,19 @@ export const Example = ({sentence = [], audio = "", x}) => {
             {
                 sentence.map((textArr, y) => (
                     y === 0
-                        ? <Text onClick={exampleClick} key={`text-${x}-${y}`}>
+                        ? <ExampleText onClick={exampleClick} key={`text-${x}-${y}`}>
                             {textArr.map((word, z) => (
                                 <TextWord $audio={audio !== ""} $hover={checkHover(z)} onMouseOut={removeHover(z)} onMouseOver={addHover(z)} key={`TW-${x}-${y}-${z}`}>{word}</TextWord>
                             ))}
-                        </Text>
-                        : <SubText onClick={exampleClick} key={`subText-${x}-${y}`}>
+                        </ExampleText>
+                        : <ExampleSubText onClick={exampleClick} key={`subText-${x}-${y}`}>
                             {textArr.map((word, z) => (
                                 <SubTextWord $audio={audio !== ""} $hover={checkHover(z)} onMouseOut={removeHover(z)} onMouseOver={addHover(z)} key={`STW-${x}-${y}-${z}`}>{`${word} `}</SubTextWord>
                             ))}
-                        </SubText>
+                        </ExampleSubText>
         
                 ))
             }
         </Column>
-        {audio !== "" && <Img onClick={exampleClick} src={sound}/>}
     </ExampleWrap>
 }

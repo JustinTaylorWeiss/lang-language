@@ -10,18 +10,25 @@ export const TileWrap = styled.div`
 `;
 
 export const H1 = styled.h1`
-    padding-left: 60px;
     margin: 0;
     margin-top: 120px;
     font-size: 4rem;
     font-weight: 600;
     letter-spacing: 0.05em;
     color: #8075FF;
+    @media (max-width: 600px) {
+        font-size: 3.5rem;
+    }
+    @media (max-width: 500px) {
+        font-size: 3rem;
+    }
+    @media (max-width: 400px) {
+        font-size: 2.5rem;
+    }
 `
 
 export const H3 = styled.h3`
     font-size: 2rem;
-    padding-left: 40px;
     margin-bottom: 0;
 `;
 

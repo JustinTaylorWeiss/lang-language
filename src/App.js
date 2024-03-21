@@ -3,6 +3,7 @@ import { Home } from "./tiles";
 import { useEffect } from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { Nav } from "./global/Nav";
+import { Examples } from "./Examples";
 
 const AppWrap = styled.div`
     max-width: 1200px;
@@ -20,7 +21,7 @@ const App = () => {
             <Nav/>
             <Routes>
                 <Route exact path={"/"} element={<Home/>}/>
-                <Route exact path={"/examples"} element={<div>Hello World</div>}/>
+                <Route exact path={"/examples"} element={<Examples/>}/>
                 <Route path = "*" element={<Navigate to="/"/>}/>
             </Routes>
         </AppWrap>

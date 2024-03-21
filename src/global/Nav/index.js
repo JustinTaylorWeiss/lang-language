@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
+import { useMediaQuery } from "react-responsive";
 
 const NavWrap = styled.div`
     width: 100%;
@@ -8,10 +9,19 @@ const NavWrap = styled.div`
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    @media (max-width: 1100px) {
+        justify-content: center;
+    }
 `;
 
 const LogoWrap = styled.div`
     padding: 30px 0 20px 60px;
+    &:hover{
+        cursor: pointer;
+    }
+    @media (max-width: 1100px) {
+        padding-left: 0;
+    }
 `;
 
 const LogoText = styled.h1`
@@ -21,6 +31,9 @@ const LogoText = styled.h1`
     font-size: 2.5rem;
     line-height: 2.5rem;
     color: #8075FF;
+    @media (max-width: 400px) {
+        font-size: 2rem;
+    }
 `;
 
 const SubLogoText = styled(LogoText)`
@@ -29,6 +42,9 @@ const SubLogoText = styled(LogoText)`
     text-align: center;
     font-size: 1.5rem;
     color: #6320EE;
+    @media (max-width: 400px) {
+        font-size: 1rem;
+    }
 `;
 
 const NavTextWrap = styled.div`
@@ -68,7 +84,7 @@ const LinkSubText = styled.span`
 `;
 
 const scrollToElementWithID = (id) => {
-    document.getElementById(id)?.scrollIntoView();
+    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
 }
 
 export const Nav = () => {
@@ -93,14 +109,28 @@ export const Nav = () => {
     }
 
     const onLinkClick = (i) => () => {
-        if(i === 3)
-            navigate("/examples");
-        else
+        if(i === 0) {
+            window.scrollTo({
+                top: 0,
+                left: 0,
+                behavior: "smooth",
+            });
             navigate("/");
+        }
+        else if(i === 1) {
+            scrollToElementWithID("communityHeader")
+            navigate("/");
+        }
+        else if(i === 2) {
+            navigate("/examples");
+        }
+        else {
+            navigate("/");
+        }
     }
 
     return <NavWrap>
-        <LogoWrap>
+        <LogoWrap onClick={onLinkClick(0)}>
             <LogoText>
                 [Lang]La-ng.com
             </LogoText>
@@ -108,21 +138,22 @@ export const Nav = () => {
                 LangLanguage.com
             </SubLogoText>
         </LogoWrap>
-        <NavTextWrap>
-            {   
-                [
-                    ["gt-ngst-rt-d/",  "getting started"],
-                    ["sp-k/-ng[Lang]", "speaking Lang"  ], 
-                    ["[Lang]cm-un-ty", "Lang community" ],
-                    ["Mo-r/Ex-mp-ls",  "More Examples"  ]
-                ].map(([langText, englishText], i) => (
-                    <Link key={`navLink-${i}`} onClick={onLinkClick(i)} onMouseOver={addHover(i)}  onMouseOut={removeHover(i)}>
-                        <LinkText key={`navLinkText-${i}`} $hover={checkHover(i)}>{langText}</LinkText>
-                        <LinkSubText key={`navSubLinkText-${i}`} $hover={checkHover(i)}>{englishText}</LinkSubText>
-                    </Link>
-                ))
+        {
+            !useMediaQuery({ query:'(max-width: 1100px)'}) && <NavTextWrap>
+                {  
+                    [
+                        ["hm", "Home"],
+                        ["[Lang]cm-un-ty", "Lang community"],
+                        ["mo-r/ex-mp-ls",  "More Examples" ]
+                    ].map(([langText, englishText], i) => (
+                        <Link key={`navLink-${i}`} onClick={onLinkClick(i)} onMouseOver={addHover(i)}  onMouseOut={removeHover(i)}>
+                            <LinkText key={`navLinkText-${i}`} $hover={checkHover(i)}>{langText}</LinkText>
+                            <LinkSubText key={`navSubLinkText-${i}`} $hover={checkHover(i)}>{englishText}</LinkSubText>
+                        </Link>
+                    ))
 
-            }
-        </NavTextWrap>
+                }
+            </NavTextWrap>
+        }
     </NavWrap>
 };
