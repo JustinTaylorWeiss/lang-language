@@ -6,11 +6,16 @@ import { Example } from "../../global/Example";
 
 const Row = styled.div`
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    gap: 100px;
+    gap: 28px;
+    margin: 8px 0;
     @media (max-width: 600px) {
-        gap: 50px;
+        gap: 18px;
+    }
+    @media (max-width: 350px) {
+        gap: 12px;
     }
 `;
 
@@ -26,27 +31,64 @@ const OL = styled.ol`
     padding-left: 0;
     width: 75%;
     font-size: 1.65rem;
+    list-style: none;
+    counter-reset: rules;
+    @media (max-width: 800px) {
+        width: 88%;
+    }
 `;
 
 const PFill = styled(P)`
     width: 55%;
     text-align: justify;
-    text-align-last: justify;
 `;
 
 const LI = styled.li`
+    position: relative;
+    counter-increment: rules;
     text-align: justify;
-    text-align-last: justify;
+    padding: 24px 28px 24px 80px;
+    margin: 72px 0 28px 0;
+    background: linear-gradient(135deg, rgba(128, 117, 255, 0.06), rgba(99, 32, 238, 0.02));
+    border: 1px solid rgba(128, 117, 255, 0.15);
+    border-left: 3px solid #8075FF;
+    border-radius: 14px;
+
+    &::before {
+        content: counter(rules);
+        position: absolute;
+        left: 20px;
+        top: 22px;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: #F8F0FB;
+        background: linear-gradient(135deg, #8075FF, #6320EE);
+        border-radius: 50%;
+        box-shadow: 0 4px 12px rgba(99, 32, 238, 0.35);
+    }
+
     @media (max-width: 1300px) {
-        padding: 50px 0px;
-        text-align-last: left;
         text-align: left;
     }
     @media (max-width: 600px) {
         font-size: 1.5rem;
+        padding: 20px 20px 20px 72px;
     }
     @media (max-width: 400px) {
         font-size: 1.25rem;
+        padding: 18px 16px 18px 64px;
+        &::before {
+            width: 34px;
+            height: 34px;
+            left: 16px;
+            top: 18px;
+            font-size: 1rem;
+        }
     }
 `;
 

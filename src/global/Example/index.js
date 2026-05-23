@@ -1,14 +1,36 @@
 import styled from "styled-components";
 import { TileWrap, H1, H3, P, Text, SubText } from "../index";
-import { useEffect, useState } from "react";
+import { useRef, useState } from "react";
 import sound from './assets/sound.png';
+import audioManifest from '../../audioManifest.json';
+
+const AUDIO_BASE = `${process.env.PUBLIC_URL || ''}/audio`;
+
+const speakFallback = (text) => {
+    if (typeof window === 'undefined' || !window.speechSynthesis) return;
+    window.speechSynthesis.cancel();
+    window.speechSynthesis.speak(new SpeechSynthesisUtterance(text));
+};
 
 const ExampleWrap = styled.div`
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    margin: 30px 0;
+    box-sizing: border-box;
+    min-width: 96px;
+    margin: 12px 4px;
+    padding: 16px 20px;
+    border-radius: 14px;
+    background: linear-gradient(135deg, rgba(128, 117, 255, 0.04), rgba(99, 32, 238, 0.02));
+    border: 1px solid rgba(128, 117, 255, 0.12);
+    transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+    &:hover {
+        border-color: rgba(128, 117, 255, 0.35);
+        background: linear-gradient(135deg, rgba(128, 117, 255, 0.08), rgba(99, 32, 238, 0.04));
+        transform: translateY(-2px);
+        box-shadow: 0 8px 24px rgba(99, 32, 238, 0.15);
+    }
 `;
 
 const Column = styled.div`
@@ -74,22 +96,14 @@ const Img = styled.img`
 export const Example = ({sentence = [], audio = "", x}) => {
 
     const [hoverPairs, setHoverPairs] = useState([]);
-    const [utterance, setUtterance] = useState("");
-
-    useEffect(() => {
-        if(utterance !== "") {
-            const speach = new SpeechSynthesisUtterance(utterance);
-            speach.onend = () => {setUtterance("");}
-            window.speechSynthesis.speak(speach);
-        }
-    },[utterance])
+    const audioRef = useRef(null);
 
     const checkHover = (i) => (
         hoverPairs.includes(i)
     );
 
     const addHover = (i) => () => {
-        setHoverPairs(prev => 
+        setHoverPairs(prev =>
             prev.includes(i)
                 ? prev
                 : [...prev, i]
@@ -101,8 +115,19 @@ export const Example = ({sentence = [], audio = "", x}) => {
     }
 
     const exampleClick = () => {
-        if(audio !== "")
-            setUtterance(audio)
+        if (audio === "") return;
+        const file = audioManifest[audio];
+        if (!file) {
+            speakFallback(audio);
+            return;
+        }
+        if (audioRef.current) {
+            audioRef.current.pause();
+            audioRef.current.currentTime = 0;
+        }
+        const el = new Audio(`${AUDIO_BASE}/${file}`);
+        audioRef.current = el;
+        el.play().catch(() => speakFallback(audio));
     };
 
     const speach = sentence[2] ?? "";

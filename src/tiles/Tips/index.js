@@ -36,12 +36,10 @@ const OL = styled.ol`
 const PFill = styled(P)`
     width: 55%;
     text-align: justify;
-    text-align-last: justify;
 `;
 
 const LI = styled.li`
     text-align: justify;
-    text-align-last: justify;
 `;
 
 const LIS = styled(LI)`

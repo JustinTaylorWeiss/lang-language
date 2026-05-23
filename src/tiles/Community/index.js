@@ -31,7 +31,6 @@ const OL = styled.ol`
 const PFill = styled(P)`
     width: 55%;
     text-align: justify;
-    text-align-last: justify;
 `;
 
 const H4 = styled(H3)`
@@ -57,6 +56,10 @@ const DiscordWrap = styled.div`
 `;
 
 const IFrame = styled.iframe`
+    background-color: transparent;
+    border-radius: 14px;
+    box-shadow: 0 12px 40px rgba(99, 32, 238, 0.25);
+    outline: 1px solid rgba(128, 117, 255, 0.2);
     @media (max-width: 400px) {
         width: 100%
     }
@@ -75,7 +78,7 @@ export const Community = () => {
         <H1 id="communityHeader">Community</H1>
         <H4>Join the Lang language Discord server!</H4>
         <DiscordWrap>
-            <IFrame src="https://discord.com/widget?id=1217362796212125776&theme=dark" width="350" height="500" allowtransparency="true" frameBorder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"/>
+            <IFrame src="https://discord.com/widget?id=1217362796212125776&theme=dark" width="350" height="500" frameBorder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"/>
         </DiscordWrap>
     </TileWrap>
 };

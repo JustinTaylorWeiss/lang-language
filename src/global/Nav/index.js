@@ -26,22 +26,30 @@ const LogoWrap = styled.div`
 
 const LogoText = styled.h1`
     letter-spacing: 0.05em;
-    font-weight: 600;
+    font-weight: 700;
     margin: 0;
+    padding: 4px 0 2px 0;
     font-size: 2.5rem;
-    line-height: 2.5rem;
-    color: #8075FF;
+    line-height: 1.2;
+    background: linear-gradient(135deg, #8075FF 0%, #6320EE 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
     @media (max-width: 400px) {
         font-size: 2rem;
     }
 `;
 
-const SubLogoText = styled(LogoText)`
+const SubLogoText = styled.div`
+    letter-spacing: 0.05em;
     font-weight: 400;
     display: block;
     text-align: center;
     font-size: 1.5rem;
-    color: #6320EE;
+    line-height: 1.6rem;
+    color: #9B8BF2;
+    margin-top: 4px;
     @media (max-width: 400px) {
         font-size: 1rem;
     }
@@ -55,15 +63,33 @@ const NavTextWrap = styled.div`
 `;
 
 const Link = styled.a`
+    position: relative;
     display: block;
-    padding-right: 20px;
+    padding: 4px 0;
+    margin-right: 28px;
     z-index: 2;
+    &::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: -2px;
+        height: 2px;
+        background: linear-gradient(90deg, #8075FF, #6320EE);
+        border-radius: 2px;
+        transform: scaleX(0);
+        transform-origin: left center;
+        transition: transform 0.3s ease;
+    }
     &:hover {
         color: #8075FF;
         cursor: pointer;
     }
-    &:last-child{
-        padding-right: 0px;
+    &:hover::after {
+        transform: scaleX(1);
+    }
+    &:last-child {
+        margin-right: 0;
     }
 `;
 
@@ -79,13 +105,9 @@ const LinkSubText = styled.span`
     display: block;
     text-align: center;
     font-size: 0.75rem;
-    color: ${props => props.$hover ? "#F8F0FB" : "#6320EE"};
+    color: ${props => props.$hover ? "#F8F0FB" : "#9B8BF2"};
     transition: 0.2s linear;
 `;
-
-const scrollToElementWithID = (id) => {
-    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
-}
 
 export const Nav = () => {
 
@@ -97,7 +119,7 @@ export const Nav = () => {
     );
 
     const addHover = (i) => () => {
-        setHoveredNavs(prev => 
+        setHoveredNavs(prev =>
             prev.includes(i)
                 ? prev
                 : [...prev, i]
@@ -118,10 +140,6 @@ export const Nav = () => {
             navigate("/");
         }
         else if(i === 1) {
-            scrollToElementWithID("communityHeader")
-            navigate("/");
-        }
-        else if(i === 2) {
             navigate("/examples");
         }
         else {
@@ -140,10 +158,9 @@ export const Nav = () => {
         </LogoWrap>
         {
             !useMediaQuery({ query:'(max-width: 1100px)'}) && <NavTextWrap>
-                {  
+                {
                     [
                         ["hm", "Home"],
-                        ["[Lang]cm-un-ty", "Lang community"],
                         ["mo-r/ex-mp-ls",  "More Examples" ]
                     ].map(([langText, englishText], i) => (
                         <Link key={`navLink-${i}`} onClick={onLinkClick(i)} onMouseOver={addHover(i)}  onMouseOut={removeHover(i)}>

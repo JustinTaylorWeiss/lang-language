@@ -12,7 +12,12 @@ const Grid = styled.div`
     grid-template-rows: 1fr;
     justify-content: flex-start;
     align-items: center;
-    padding: 50px 0px;
+    padding: 32px 24px;
+    margin: 40px 16px;
+    row-gap: 6px;
+    background: linear-gradient(135deg, rgba(128, 117, 255, 0.05), rgba(99, 32, 238, 0.02));
+    border: 1px solid rgba(128, 117, 255, 0.18);
+    border-radius: 18px;
 `;
 
 const H4 = styled(H3)`
@@ -28,18 +33,27 @@ const H4 = styled(H3)`
 const Input = styled.input`
     box-sizing: border-box;
     margin: 50px 0 0 0;
-    border: 2px solid transparent;
-    padding: 10px;
+    border: 2px solid rgba(128, 117, 255, 0.25);
+    background: rgba(248, 240, 251, 0.05);
+    color: #F8F0FB;
+    border-radius: 10px;
+    padding: 12px 18px;
     font-size: 1.5rem;
-    width: 300px;
+    width: 320px;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+    &::placeholder {
+        color: rgba(248, 240, 251, 0.45);
+    }
     &:focus {
         outline: 0;
-        border: 2px solid #8075FF;
+        border-color: #8075FF;
+        background: rgba(248, 240, 251, 0.08);
+        box-shadow: 0 0 0 4px rgba(128, 117, 255, 0.18);
     }
     @media (max-width: 500px) {
-        width: 200px;
+        width: 240px;
         font-size: 1rem;
-        padding: 10px;
+        padding: 10px 14px;
     }
 `;
 
@@ -88,14 +102,21 @@ const RTitle = styled(RText)`
 `;
 
 const Foot = styled.div`
-    padding: 0 0 10px 0;
+    margin: 16px 0;
+    padding: 12px 28px;
     font-size: 1.25rem;
     color: #8075FF;
+    border: 1px solid rgba(128, 117, 255, 0.35);
+    border-radius: 999px;
+    transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
     &:hover {
         cursor: pointer;
+        background: rgba(128, 117, 255, 0.12);
+        border-color: #8075FF;
+        transform: translateY(-2px);
     }
     &:last-child {
-        padding-top: 20px;
+        margin-bottom: 40px;
     }
 `;
 
@@ -109,9 +130,9 @@ export const Examples = () => {
     useEffect(() => {
         setFilteredWordList(
             wordList.filter(([english, lang1, lang2]) => (
-                english.includes(inputText) || 
-                lang1.includes(inputText) ||
-                lang2.includes(inputText)
+                english.toLowerCase().includes(inputText.toLowerCase()) || 
+                lang1.toLowerCase().includes(inputText.toLowerCase()) ||
+                lang2.toLowerCase().includes(inputText.toLowerCase())
             ))
         )
     },[setFilteredWordList, inputText])
